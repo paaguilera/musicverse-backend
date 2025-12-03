@@ -59,7 +59,7 @@ public class InicioComponent implements CommandLineRunner{
         usuarioRegistroDTO.setNombre("admin");
         usuarioRegistroDTO.setRut("11.111.111-1");
         usuarioRegistroDTO.setDireccion("admin");
-        usuarioRegistroDTO.setMetodoPago(0);
+        usuarioRegistroDTO.setMetodoPago(1);
         usuarioRegistroDTO.setGenero("Masculino");
         usuarioRegistroDTO.setTelefono("999666333");
         usuarioRegistroDTO.setFechaNacimiento(LocalDate.of(1995, 07, 24));
