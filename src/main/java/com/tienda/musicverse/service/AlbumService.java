@@ -98,7 +98,7 @@ public class AlbumService {
                 Files.createDirectories(finalPath.getParent());
                 Files.write(finalPath, imagen.getBytes());
 
-                String url = ipUrl + filename;
+                String url = baseUrl + filename;
 
                 album.setImagenUrl(url);
             }
