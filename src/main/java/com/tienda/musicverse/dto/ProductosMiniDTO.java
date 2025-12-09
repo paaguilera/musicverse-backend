@@ -8,6 +8,7 @@ public class ProductosMiniDTO {
     private String genero;
     private int precio;
     private String imagenUrl;
+    private Boolean desabilidato;
 
     public ProductosMiniDTO() {
         this.id = 0;
@@ -16,15 +17,19 @@ public class ProductosMiniDTO {
         this.genero = "";
         this.precio = 0;
         this.imagenUrl = "";
+        this.desabilidato = false;
     }
 
-    public ProductosMiniDTO(int id, String nombre, String artista, String genero, int precio, String imagenUrl) {
+    public ProductosMiniDTO(int id, String nombre, String artista, String genero, int precio, String imagenUrl,
+            Boolean desabilidato
+    ) {
         this.id = id;
         this.nombre = nombre;
         this.artista = artista;
         this.genero = genero;
         this.precio = precio;
         this.imagenUrl = imagenUrl;
+        this.desabilidato = desabilidato;
     }
 
     public int getId() {
@@ -64,5 +69,12 @@ public class ProductosMiniDTO {
         this.imagenUrl = imagenUrl;
     }
 
+    public Boolean getDesabilidato() {
+        return desabilidato;
+    }
+
+    public void setDesabilidato(Boolean desabilidato) {
+        this.desabilidato = desabilidato;
+    }
     
 }

@@ -23,6 +23,7 @@ public class Album {
     private LocalDate fecha_lanza;
     private int precio;
     private int stock;
+    private boolean desabilidato;
 
     private String imagenUrl;
 
@@ -49,10 +50,12 @@ public class Album {
         this.precio = 0;
         this.stock = 0;
         this.imagenUrl = "";
+        this.desabilidato = false;
     }
 
     public Album(int id_album, String nombre, String formato, long codeUPC, LocalDate fecha_lanza, int precio,
-            int stock, String imagenUrl, Artista artista, List<Cancion> canciones, List<Resenia> resenias, Genero genero) {
+            int stock, String imagenUrl, Artista artista, List<Cancion> canciones, List<Resenia> resenias, Genero genero,
+            Boolean desabilidato) {
         this.id_album = id_album;
         this.nombre = nombre;
         this.formato = formato;
@@ -162,5 +165,10 @@ public class Album {
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
     }
-    
+    public boolean isDesabilidato() {
+        return desabilidato;
+    }
+    public void setDesabilidato(boolean desabilidato) {
+        this.desabilidato = desabilidato;
+    }
 }

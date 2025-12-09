@@ -3,7 +3,9 @@ package com.tienda.musicverse.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,7 +109,7 @@ public class UsuarioService {
         List<Usuario> usuarios = usuarioRepository.findAll();
         UsuarioMiniDTO dto = new UsuarioMiniDTO();
         for(Usuario usuario: usuarios){
-            if(!usuario.getRut().equals("11.111.111-1")){
+            if(!usuario.getRol().getNombre().equals("Admin")){
                 dto.setCorreo(usuario.getCorreo());
                 dto.setNombre(usuario.getNombre());
                 dto.setRut(usuario.getRut());
@@ -205,5 +207,24 @@ public class UsuarioService {
         GenerosFavoritosDTO genDTO = new GenerosFavoritosDTO();
         this.generosFavoritos(rut, genDTO);
         usuarioRepository.delete(usuario);
+    }
+
+    public List<UsuarioMiniDTO> buscarQuery(String query) {
+
+        List<Usuario> resultados = new ArrayList<>();
+        resultados.addAll(usuarioRepository.findByNombreContainingIgnoreCase(query));
+        resultados.addAll(usuarioRepository.findByCorreoContainingIgnoreCase(query));
+        resultados.addAll(usuarioRepository.findByRutContainingIgnoreCase(query));
+
+        resultados = resultados.stream()
+                                .filter(user -> !user.getRol().getNombre().equals("Admin"))
+                                .distinct().toList();
+        return resultados.stream().map(user -> {
+            UsuarioMiniDTO mini = new UsuarioMiniDTO();
+            mini.setCorreo(user.getCorreo());
+            mini.setNombre(user.getNombre());
+            mini.setRut(user.getRut());
+            return mini;
+        }).toList();
     }
 }

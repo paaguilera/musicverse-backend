@@ -16,14 +16,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tienda.musicverse.dto.AlbumEstadoDTO;
 import com.tienda.musicverse.dto.AlbumGrandDTO;
 import com.tienda.musicverse.dto.AlbumRegistroDTO;
+import com.tienda.musicverse.dto.GenerosFavoritosDTO;
 import com.tienda.musicverse.dto.ProductosMiniDTO;
 import com.tienda.musicverse.model.Album;
 import com.tienda.musicverse.model.Artista;
 import com.tienda.musicverse.model.Cancion;
 import com.tienda.musicverse.model.Genero;
 import com.tienda.musicverse.model.Resenia;
+import com.tienda.musicverse.model.Usuario;
 import com.tienda.musicverse.repository.AlbumRepository;
 import com.tienda.musicverse.repository.ArtistaRepository;
 import com.tienda.musicverse.repository.GeneroRepository;
@@ -98,7 +101,7 @@ public class AlbumService {
                 Files.createDirectories(finalPath.getParent());
                 Files.write(finalPath, imagen.getBytes());
 
-                String url = baseUrl + filename;
+                String url = ipUrl + filename;
 
                 album.setImagenUrl(url);
             }
@@ -125,6 +128,7 @@ public class AlbumService {
             mini.setImagenUrl(album.getImagenUrl());
             mini.setNombre(album.getNombre());
             mini.setPrecio(album.getPrecio());
+            mini.setDesabilidato(album.isDesabilidato());
             return mini;
         }).forEach(lista::add);
 
@@ -143,6 +147,7 @@ public class AlbumService {
             mini.setImagenUrl(album.getImagenUrl());
             mini.setNombre(album.getNombre());
             mini.setPrecio(album.getPrecio());
+            mini.setDesabilidato(album.isDesabilidato());
             return mini;
         }).forEach(lista::add);
 
@@ -160,6 +165,7 @@ public class AlbumService {
             mini.setImagenUrl(album.getImagenUrl());
             mini.setNombre(album.getNombre());
             mini.setPrecio(album.getPrecio());
+            mini.setDesabilidato(album.isDesabilidato());
             return mini;
         }).forEach(lista::add);
 
@@ -233,6 +239,7 @@ public class AlbumService {
             mini.setImagenUrl(album.getImagenUrl());
             mini.setNombre(album.getNombre());
             mini.setPrecio(album.getPrecio());
+            mini.setDesabilidato(album.isDesabilidato());
             return mini;
         }).toList();
     }
@@ -266,7 +273,13 @@ public class AlbumService {
         albumGrandDTO.setImagenUrl(album.getImagenUrl());
         albumGrandDTO.setArtista(album.getArtista().getNombre());
         albumGrandDTO.setGenero(album.getGenero().getNombre());
-
+        albumGrandDTO.setDesabilidato(album.isDesabilidato());
         return albumGrandDTO;
+    }
+
+    public void estadoAlbum(int id,AlbumEstadoDTO estadoDTO){
+        Album album = this.albumRepository.findById(id).get();
+        album.setDesabilidato(estadoDTO.isEstado());
+        albumRepository.save(album);
     }
 }

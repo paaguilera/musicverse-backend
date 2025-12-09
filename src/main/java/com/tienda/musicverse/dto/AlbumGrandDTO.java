@@ -17,6 +17,7 @@ public class AlbumGrandDTO {
     private List<String> canciones;
     private List<String> resenias;
     private String genero;
+    private boolean desabilidato;
 
     public AlbumGrandDTO() {
         this.idAlbum = 0;
@@ -31,9 +32,11 @@ public class AlbumGrandDTO {
         this.canciones = new ArrayList<>();
         this.resenias = new ArrayList<>();
         this.genero = "";
+        this.desabilidato = false;
     }
     public AlbumGrandDTO(int idAlbum, String nombre, String formato, Long codeUPC, LocalDate fechaLanza, int precio,
-            int stock, String imagenUrl, String artista, List<String> canciones, List<String> resenias, String genero) {
+            int stock, String imagenUrl, String artista, List<String> canciones, List<String> resenias, String genero,
+            Boolean desabilidato) {
         this.idAlbum = idAlbum;
         this.nombre = nombre;
         this.formato = formato;
@@ -46,6 +49,7 @@ public class AlbumGrandDTO {
         this.canciones = canciones;
         this.resenias = resenias;
         this.genero = genero;
+        this.desabilidato = desabilidato;
     }
     public int getIdAlbum() {
         return idAlbum;
@@ -119,7 +123,12 @@ public class AlbumGrandDTO {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+    
+    public boolean isDesabilidato() {
+        return desabilidato;
+    }
+    public void setDesabilidato(boolean desabilidato) {
+        this.desabilidato = desabilidato;
+    }
 
-    
-    
 }

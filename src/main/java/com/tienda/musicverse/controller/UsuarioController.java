@@ -3,7 +3,6 @@ package com.tienda.musicverse.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tienda.musicverse.dto.GenerosFavoritosDTO;
 import com.tienda.musicverse.dto.GenerosUsuarioDTO;
 import com.tienda.musicverse.dto.MetodoPagoDTO;
+import com.tienda.musicverse.dto.UsuarioMiniDTO;
 import com.tienda.musicverse.dto.UsuarioModificarDTO;
-import com.tienda.musicverse.model.Genero;
 import com.tienda.musicverse.service.UsuarioService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,5 +63,9 @@ public class UsuarioController {
         System.out.println(usuarioService.generosFavoritoList(rut));
         return usuarioService.generosFavoritoList(rut);
     }
-    
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<UsuarioMiniDTO>> buscarMiniUser(@RequestParam String query) {
+        return ResponseEntity.ok(usuarioService.buscarQuery(query));
+    }
 }
